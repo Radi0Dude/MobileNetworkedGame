@@ -14,7 +14,10 @@ public class UnityAuthManager
     {
         Debug.Log("UnityAuthManager initialized.");
     }
-
+    public bool HasExistinSession()
+    {
+        return AuthenticationService.Instance.SessionTokenExists;
+    }
     public async Task SignUpAnon()
     {
         try

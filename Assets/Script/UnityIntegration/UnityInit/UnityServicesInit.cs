@@ -1,5 +1,6 @@
 using System;
 using Unity.Services.Core;
+using Unity.Services.Friends;
 using UnityEngine;
 
 public class UnityServicesInit : MonoBehaviour
@@ -11,6 +12,7 @@ public class UnityServicesInit : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
+            await FriendsService.Instance.InitializeAsync();
             signInAnon = GetComponentInChildren<SignInAnon>();
             signInAnon.SignUpAnon();
         }

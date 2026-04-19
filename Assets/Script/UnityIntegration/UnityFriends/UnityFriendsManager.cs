@@ -1,15 +1,13 @@
+using System.Threading.Tasks;
 using UnityEngine;
+using Unity.Services;
+using Unity.Services.Friends;
+using Unity.Services.Friends.Notifications;
 
 public class UnityFriendsManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    
+    public async Task sendFriendRequest(string friendPlayerId)
     {
         
     }
