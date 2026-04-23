@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
+using Unity.Services.Authentication.PlayerAccounts;
 using Unity.Services.Core;
 using UnityEngine;
 
@@ -33,6 +34,42 @@ public class UnityAuthManager
         catch (RequestFailedException ex)
         {
             Debug.LogWarning($"An error occure: {ex.Message}");
+        }
+    }
+
+    public async Task SignInWithEmailAndPassword(string email, string password) 
+    { 
+        
+    }
+
+    public async Task SignInWithUnity()
+    {
+        try
+        {
+            await AuthenticationService.Instance.SignInWithUnityAsync(PlayerAccountService.Instance.AccessToken);
+            Debug.Log("Sign-in with Unity successful.");
+            Debug.Log($"Player ID: {AuthenticationService.Instance.PlayerId}");
+
+        }
+        catch (AuthenticationException ex)
+        {
+            Debug.LogException(ex);
+        }
+        catch (RequestFailedException ex) 
+        { 
+            Debug.LogException(ex);
+        }
+    }
+
+    public async Task ChangeUsername(string username)
+    {
+        try
+        {
+
+        }
+        catch (AuthenticationException ex) 
+        { 
+        
         }
     }
 

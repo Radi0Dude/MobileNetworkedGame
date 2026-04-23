@@ -12,9 +12,11 @@ public class UnityServicesInit : MonoBehaviour
         try
         {
             await UnityServices.InitializeAsync();
-            await FriendsService.Instance.InitializeAsync();
             signInAnon = GetComponentInChildren<SignInAnon>();
             signInAnon.SignUpAnon();
+            await FriendsService.Instance.InitializeAsync();
+           
+           
         }
         catch (Exception e)
         { 
