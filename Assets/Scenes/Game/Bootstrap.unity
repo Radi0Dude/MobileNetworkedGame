@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 316207797}
   - component: {fileID: 316207798}
   m_Layer: 0
-  m_Name: FroendInit
+  m_Name: FriendInit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260aa7ff82167554c8a003895ed94ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FriendsInit
+  initialized: 0
 --- !u!1 &407665999
 GameObject:
   m_ObjectHideFlags: 0
