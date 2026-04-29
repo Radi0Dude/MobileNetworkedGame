@@ -1,25 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Services.CloudSave;
 using UnityEngine;
 
 public class LoadPlayerName : MonoBehaviour
 {
     [SerializeField]
     TMP_Text playerNameText;
-    private async void Start()
+
+    private void Start()
     {
-        if(playerNameText == null)
+        if (playerNameText == null)
             playerNameText = FindAnyObjectByType<TMP_Text>();
-        var playerNameValue = await UnityCloudCodeManager.Instance.LoadPlayerName();
-        if(string.IsNullOrEmpty(playerNameValue))
+
+        string playerNameValue = UnityAuthManager.Instance.GetPlayerName();
+
+        if (string.IsNullOrEmpty(playerNameValue))
         {
             playerNameText.text = "Welcome";
-            Debug.Log("Player name not found in Cloud Save.");
+            Debug.Log("Player name not found.");
             return;
         }
-        StartCoroutine(WelcomePlayerBack(playerNameValue.ToString()));
+        
+        StartCoroutine(WelcomePlayerBack(playerNameValue));
     }
 
     IEnumerator WelcomePlayerBack(string playerName) 

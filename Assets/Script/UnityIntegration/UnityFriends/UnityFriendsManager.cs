@@ -13,3 +13,4 @@ public class UnityFriendsManager : MonoBehaviour
         await FriendsService.Instance.AddFriendAsync(friendPlayerId);
     }
 }
+

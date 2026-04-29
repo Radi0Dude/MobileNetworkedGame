@@ -34,7 +34,7 @@ public class PlayerCreateName : MonoBehaviour
             StartCoroutine(SetInputFieldToDisplayNoName());
             return;
         }
-        await UnityCloudCodeManager.Instance.SavePlayerName(name);
+        await UnityAuthManager.Instance.ChangeUsername(name);
     }
 
     public void OnInputFieldChange()
@@ -52,7 +52,7 @@ public class PlayerCreateName : MonoBehaviour
         yield return new WaitForSeconds(2f);
         if(!clickWhileDisplayEmpty)
             yield break;
-        inputField.text = "";
+        inputField.SetTextWithoutNotify("");
         clickWhileDisplayEmpty = false;
     }
 }

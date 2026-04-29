@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class UnityServicesInit : MonoBehaviour
 {
-    SignInAnon signInAnon;
+    LoadCorrectSceneInit loadCorrectSceneInit;
 
     async void Awake()
     {
         try
         {
             await UnityServices.InitializeAsync();
-            signInAnon = GetComponentInChildren<SignInAnon>();
-            signInAnon.SignUpAnon();
-            await FriendsService.Instance.InitializeAsync();
-           
-           
+            loadCorrectSceneInit = GetComponentInChildren<LoadCorrectSceneInit>();
+            loadCorrectSceneInit.LoadCorrectScene();
         }
         catch (Exception e)
         { 

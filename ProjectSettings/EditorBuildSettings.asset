@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/Bootstrap.unity
     guid: b3d68c21fafb1d9469960b7e039ba900
   - enabled: 1
+    path: Assets/Scenes/Game/FirstTimeUserLoading.unity
+    guid: 60db22da341fe0c46a447a20b3980ece
+  - enabled: 1
     path: Assets/Scenes/Game/GameScene.unity
     guid: da06a52c4ed0e1549b0d328ad3182ff4
   - enabled: 1
