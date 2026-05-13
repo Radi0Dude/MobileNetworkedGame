@@ -119,24 +119,24 @@ public class UnityAuthManager
         }
     }
 
-    public async Task<bool> SignInAsync(string id, string password)
-    {
-        // Simulate an asynchronous sign-in process
-        await Task.Delay(1000); // Simulate network delay
-        Debug.Log($"Sign-in successful for ID: {id}");
-        //player managment id cant be found call sign up and ask them for a confirmation on the password and then sign them in
-        return true; // Return true for successful sign-in
-    }
+    //public async Task<bool> SignInAsync(string id, string password)
+    //{
+    //    // Simulate an asynchronous sign-in process
+    //    await Task.Delay(1000); // Simulate network delay
+    //    Debug.Log($"Sign-in successful for ID: {id}");
+    //    //player managment id cant be found call sign up and ask them for a confirmation on the password and then sign them in
+    //    return true; // Return true for successful sign-in
+    //}
 
-    public Task<bool> SignUpAsync(string id, string password)
-    {
-        // Simulate an asynchronous sign-up process
-        return Task.Run(() =>
-        {
-            Debug.Log($"Sign-up successful for ID: {id}");
-            return true; // Return true for successful sign-up
-        });
-    }
+    //public Task<bool> SignUpAsync(string id, string password)
+    //{
+    //    // Simulate an asynchronous sign-up process
+    //    return Task.Run(() =>
+    //    {
+    //        Debug.Log($"Sign-up successful for ID: {id}");
+    //        return true; // Return true for successful sign-up
+    //    });
+    //}
 
     public Task<string> GetPlayerId()
     {

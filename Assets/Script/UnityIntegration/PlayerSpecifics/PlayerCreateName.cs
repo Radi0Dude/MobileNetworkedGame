@@ -22,7 +22,7 @@ public class PlayerCreateName : MonoBehaviour
     {
         if(inputField == null)
             inputField = FindAnyObjectByType<TMP_InputField>();
-        playerNameFinder = UnityCloudCodeManager.Instance.playerNameFinder;
+        playerNameFinder = UnityCloudSaveManager.Instance.playerNameFinder;
     }
 
     public async void SetPlayerName()
