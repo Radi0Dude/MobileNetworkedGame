@@ -4,6 +4,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Authentication.PlayerAccounts;
 using Unity.Services.Core;
 using UnityEngine;
+using static SaveAndLoadManager;
 
 public class UnityAuthManager
 {

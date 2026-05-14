@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,8 +15,25 @@ public class GetTVSeriesID : MonoBehaviour
     private void Start()
     {
         posterImageSetter = FindAnyObjectByType<SetAndCreatePosterImage>();
+        LoadShowsOnStart();
         GetRandomShow();
+        
+        //StartCoroutine(TestingHundredsOfShows());
+
     }
+    [ContextMenu("Test Hundreds of Shows")]
+    public IEnumerator TestingHundredsOfShows()
+    {
+        for (int i = 0; i < 50; i++)
+        {
+            Debug.Log($"Testing show number {i + 1}");
+            GetShowInfo();
+            GetRandomShow();
+            yield return new WaitForSeconds(1f);
+        }
+
+    }
+
     [ContextMenu("Get Random Show")]
     public void GetRandomShow()
     {
@@ -31,6 +51,16 @@ public class GetTVSeriesID : MonoBehaviour
         //{
         //    currentID = id;
         //}
+        while (true)
+        {
+            SaveAndLoadManager.Instance.LoadShowIDs();
+
+            if (!SaveAndLoadManager.Instance.playerShows.Any(s => s.showId == currentID))
+                break;
+
+            Debug.Log($"Show with ID {currentID} already exists. Skipping.");
+            GetRandomShow();
+        }
 
         var show = await TVMazeAPIManager.Instance.GetShowDetails(currentID);
         Debug.Log($"Show Name: {show.name}, URL: {show.url}, show weight {show.weight}");
@@ -41,11 +71,23 @@ public class GetTVSeriesID : MonoBehaviour
 
         await SaveAndLoadManager.Instance.SavePosterToDevice(posterTexture, currentID);
         posterImageSetter.SetEverythingPoster(show.name, show.url, posterTexture);
+        SaveAndLoadManager.Instance.SaveShowIDs(currentID, show.weight, show.url, show.name);
         GetRandomShow();
 
 
     }
-
+    public async void LoadShowsOnStart() 
+    { 
+        SaveAndLoadManager.Instance.LoadShowIDs();
+        List<SaveAndLoadManager.PlayerShows> playerShows = SaveAndLoadManager.Instance.playerShows;
+        foreach (var show in playerShows)
+        {
+            Debug.Log($"Loaded Show: {show.title} (ID: {show.showId}, Weight: {show.weight}, URL: {show.showURL})");
+            Texture2D posterTexture = await SaveAndLoadManager.Instance.LoadPoster(show.showId);
+            posterImageSetter.SetEverythingPoster(show.title, show.showURL, posterTexture);
+        }
+    }
+    
 
 
     public async Task GetRandomShowCloudCode()

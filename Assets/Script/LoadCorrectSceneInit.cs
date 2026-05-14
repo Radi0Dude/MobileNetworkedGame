@@ -2,6 +2,7 @@ using System;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static SaveAndLoadManager;
 
 public class LoadCorrectSceneInit : MonoBehaviour
 {

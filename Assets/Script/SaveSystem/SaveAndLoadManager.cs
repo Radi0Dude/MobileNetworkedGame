@@ -9,6 +9,7 @@ public class SaveAndLoadManager
     public static SaveAndLoadManager Instance => _instance ??= new SaveAndLoadManager();
 
     string folderPath = Path.Combine(Application.persistentDataPath, "PosterFolder");
+    public List<PlayerShows> playerShows = new List<PlayerShows>();
     public void SavePlayerName(string playerName)
     {
         PlayerPrefs.SetString("PlayerName", playerName);
@@ -17,7 +18,7 @@ public class SaveAndLoadManager
     }
     public void SaveCurrentLogInMethod(LogInMethod logInMethod)
     {
-        PlayerPrefs.SetInt("LogInMethod", (int) logInMethod);
+        PlayerPrefs.SetInt("LogInMethod", (int)logInMethod);
         PlayerPrefs.Save();
         Debug.Log($"Current login method '{logInMethod}' saved to PlayerPrefs.");
     }
@@ -43,23 +44,23 @@ public class SaveAndLoadManager
     }
     public LogInMethod GetCurrentLogInMethod()
     {
-         return (LogInMethod) PlayerPrefs.GetInt("LogInMethod", (int) LogInMethod.None);
+        return (LogInMethod)PlayerPrefs.GetInt("LogInMethod", (int)LogInMethod.None);
     }
 
-    
 
-    public async Task SavePosterToDevice(Texture2D sprite, string posterID) 
-    { 
-        
 
-        if (!Directory.Exists(folderPath)) 
-        { 
+    public async Task SavePosterToDevice(Texture2D sprite, string posterID)
+    {
+
+
+        if (!Directory.Exists(folderPath))
+        {
             Directory.CreateDirectory(folderPath);
         }
-        string path = Path.Combine(folderPath, $"poster_{posterID}.png");
+        string path = Path.Combine(folderPath, $"poster_{posterID}.jpeg");
 
 
-        byte[] pngData = sprite.EncodeToPNG();
+        byte[] pngData = sprite.EncodeToJPG();
         await File.WriteAllBytesAsync(path, pngData);
 
     }
@@ -74,7 +75,7 @@ public class SaveAndLoadManager
         {
             byte[] bytes = await File.ReadAllBytesAsync(path);
             texture = new Texture2D(2, 2);
-            texture.LoadImage(bytes); 
+            texture.LoadImage(bytes);
             return texture;
         }
         else
@@ -85,22 +86,59 @@ public class SaveAndLoadManager
 
     }
 
-    public void SaveShowIDs(string showIDs, int weight)
+    
+
+    public void SaveShowIDs(string showIDs, int weight, string showURL, string showName)
     {
-        
+        playerShows.Clear();
+        LoadShowIDs();
+        playerShows.Add(new PlayerShows { showId = showIDs, weight = weight, showURL = showURL, title = showName });
+
+        PlayerShowsWrapper wrapper = new PlayerShowsWrapper { shows = playerShows };
+        string json = JsonUtility.ToJson(wrapper);
+
+
+        PlayerPrefs.SetString("SavedShows", json);
+        PlayerPrefs.Save();
+
     }
-}
 
-public class PlayerShows
-{
-    //this is here to save every ShowID that the player has collected
-    public Dictionary<string, int> showIDsAndWeights; //the string is the showID, the int is the weight of the show, the higher the weight, the more popular the show is
-}
+    public void LoadShowIDs()
+    {
+        string json = PlayerPrefs.GetString("SavedShows", string.Empty);
 
-public enum LogInMethod
-{
-    None,
-    Anonymous,
-    Unity,
-    EmailAndPassword
+        if (!string.IsNullOrEmpty(json))
+        {
+            PlayerShowsWrapper wrapper = JsonUtility.FromJson<PlayerShowsWrapper>(json);
+            playerShows = wrapper.shows ?? new List<PlayerShows>();
+        }
+        else
+        {
+            playerShows = new List<PlayerShows>();
+        }
+    }
+
+    [System.Serializable]
+    public class PlayerShowsWrapper
+    {
+        public List<PlayerShows> shows = new List<PlayerShows>();
+    }
+    [System.Serializable]
+    public class PlayerShows
+    {
+        //this is here to save every ShowID that the player has collected
+        public string showId;
+        public int weight;
+        public string showURL;
+        public string title;
+
+    }
+    [System.Serializable]
+    public enum LogInMethod
+    {
+        None,
+        Anonymous,
+        Unity,
+        EmailAndPassword
+    }
 }
