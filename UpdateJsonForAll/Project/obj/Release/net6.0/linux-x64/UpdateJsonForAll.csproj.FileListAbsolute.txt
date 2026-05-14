@@ -1,0 +1,13 @@
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.csproj.AssemblyReference.cache
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.AssemblyInfoInputs.cache
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.AssemblyInfo.cs
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.csproj.CoreCompileInputs.cache
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.sourcelink.json
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\bin\Release\net6.0\linux-x64\UpdateJsonForAll.deps.json
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\bin\Release\net6.0\linux-x64\UpdateJsonForAll.dll
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\bin\Release\net6.0\linux-x64\UpdateJsonForAll.pdb
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.dll
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\refint\UpdateJsonForAll.dll
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\UpdateJsonForAll.pdb
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\linux-x64\ref\UpdateJsonForAll.dll

@@ -11,14 +11,17 @@ public class GetTVSeriesID : MonoBehaviour
     [SerializeField]
     Sprite currentPoster;
 
+    int currentRandomIndex;
+
     SetAndCreatePosterImage posterImageSetter;
-    private void Start()
+    private async void Start()
     {
+        await SaveAndLoadManager.Instance.LoadTVSeriesDataset();
         posterImageSetter = FindAnyObjectByType<SetAndCreatePosterImage>();
         LoadShowsOnStart();
         GetRandomShow();
         
-        //StartCoroutine(TestingHundredsOfShows());
+        StartCoroutine(TestingHundredsOfShows());
 
     }
     [ContextMenu("Test Hundreds of Shows")]
@@ -29,7 +32,7 @@ public class GetTVSeriesID : MonoBehaviour
             Debug.Log($"Testing show number {i + 1}");
             GetShowInfo();
             GetRandomShow();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(Random.Range(0.5f, 0.8f));
         }
 
     }
@@ -37,10 +40,13 @@ public class GetTVSeriesID : MonoBehaviour
     [ContextMenu("Get Random Show")]
     public void GetRandomShow()
     {
+       
         TextAsset jsonFile = Resources.Load<TextAsset>("TvSeries");
-        TvSeriesDatabase database = JsonUtility.FromJson<TvSeriesDatabase>(jsonFile.text);
 
-        TVSeriesID randomShow = database.tvSeries[Random.Range(0, database.tvSeries.Length)];
+        var database = SaveAndLoadManager.Instance.tvSeriesDatabase;
+        currentRandomIndex = Random.Range(0, database.tvSeries.Length);
+        
+        SaveAndLoadManager.TVSeriesID randomShow = database.tvSeries[currentRandomIndex];
         Debug.Log($"Random TV Series: {randomShow.title} (ID: {randomShow.id})");
         currentID = randomShow.id;
     }
@@ -62,7 +68,7 @@ public class GetTVSeriesID : MonoBehaviour
             GetRandomShow();
         }
 
-        var show = await TVMazeAPIManager.Instance.GetShowDetails(currentID);
+        var show = await TVMazeAPIManager.Instance.GetShowDetails(currentID, currentRandomIndex);
         Debug.Log($"Show Name: {show.name}, URL: {show.url}, show weight {show.weight}");
         string imageUrl = show.image?.medium ?? "No image available";
         Debug.Log($"Image URL: {imageUrl}");
@@ -90,21 +96,7 @@ public class GetTVSeriesID : MonoBehaviour
     
 
 
-    public async Task GetRandomShowCloudCode()
-    {
-        string showId = await UnityCloudCodeManager.Instance.GetRandomShow();
-    }
+    
 
 }
 
-[System.Serializable]
-public class TvSeriesDatabase
-{
-    public TVSeriesID[] tvSeries;
-}
-[System.Serializable]
-public class TVSeriesID
-{
-    public string id;
-    public string title;
-}

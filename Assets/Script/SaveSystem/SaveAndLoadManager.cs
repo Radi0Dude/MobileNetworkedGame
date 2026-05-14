@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Unity.Services.CloudSave;
 using UnityEngine;
 
 public class SaveAndLoadManager
@@ -10,6 +11,12 @@ public class SaveAndLoadManager
 
     string folderPath = Path.Combine(Application.persistentDataPath, "PosterFolder");
     public List<PlayerShows> playerShows = new List<PlayerShows>();
+
+    private const string CustomDataId = "moviedatasetupdate"; 
+    private const string TvSeriesKey = "TvSeriesDatabaseJSON";
+    
+    public TvSeriesDatabase tvSeriesDatabase;
+
     public void SavePlayerName(string playerName)
     {
         PlayerPrefs.SetString("PlayerName", playerName);
@@ -69,7 +76,7 @@ public class SaveAndLoadManager
 
     public async Task<Texture2D> LoadPoster(string posterID)
     {
-        string path = Path.Combine(folderPath, $"poster_{posterID}.png");
+        string path = Path.Combine(folderPath, $"poster_{posterID}.jpeg");
         Texture2D texture;
         if (File.Exists(path))
         {
@@ -86,7 +93,19 @@ public class SaveAndLoadManager
 
     }
 
-    
+    public async Task LoadTVSeriesDataset()
+    {
+        var result = await CloudSaveService.Instance.Data.Custom.LoadAsync(CustomDataId, new HashSet<string> { TvSeriesKey });
+        if (result.TryGetValue(TvSeriesKey, out var json))
+        {
+            tvSeriesDatabase = JsonUtility.FromJson<TvSeriesDatabase>(json.Value.GetAsString());
+            Debug.Log($"Loaded TV series dataset with {tvSeriesDatabase.tvSeries.Length} entries.");
+        }
+        else
+        {
+            Debug.LogWarning("TV series dataset not found in Cloud Save.");
+        }
+    }
 
     public void SaveShowIDs(string showIDs, int weight, string showURL, string showName)
     {
@@ -140,5 +159,17 @@ public class SaveAndLoadManager
         Anonymous,
         Unity,
         EmailAndPassword
+    }
+
+    [System.Serializable]
+    public class TvSeriesDatabase
+    {
+        public TVSeriesID[] tvSeries;
+    }
+    [System.Serializable]
+    public class TVSeriesID
+    {
+        public string id;
+        public string title;
     }
 }

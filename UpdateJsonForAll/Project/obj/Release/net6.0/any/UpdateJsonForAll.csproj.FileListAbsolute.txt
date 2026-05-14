@@ -1,0 +1,6 @@
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\any\UpdateJsonForAll.csproj.AssemblyReference.cache
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\any\UpdateJsonForAll.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\any\UpdateJsonForAll.AssemblyInfoInputs.cache
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\any\UpdateJsonForAll.AssemblyInfo.cs
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\any\UpdateJsonForAll.csproj.CoreCompileInputs.cache
+C:\Users\Tobia\Documents\UnityGames\AppForCouplesMovies\UpdateJsonForAll\Project\obj\Release\net6.0\any\UpdateJsonForAll.sourcelink.json

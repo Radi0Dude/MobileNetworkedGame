@@ -165,10 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoadSceneNewUsers
   signInAnonLoad: {fileID: 102900000, guid: 60db22da341fe0c46a447a20b3980ece, type: 3}
   tutorialScene: {fileID: 102900000, guid: e264e123287469c438185b35fb375c2e, type: 3}
-  mainGame: {fileID: 102900000, guid: da06a52c4ed0e1549b0d328ad3182ff4, type: 3}
+  mainGame: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
   signInAnonLoadName: FirstTimeUserLoading
   tutorialSceneName: FirstTimeUser
-  mainGameName: GameScene
+  mainGameName: SampleScene
 --- !u!1 &514895779
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class SignInAnon : MonoBehaviour
             Debug.LogError("Load to scene is not assigned. Please assign a scene in the inspector.");
             return;
         }
+        SignUpAnon();
         sceneName = tutorialScene.name;
     }
 

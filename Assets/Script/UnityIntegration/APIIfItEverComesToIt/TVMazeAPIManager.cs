@@ -9,7 +9,7 @@ public class TVMazeAPIManager
 {
     private static TVMazeAPIManager _instance;
     public static TVMazeAPIManager Instance => _instance ??= new TVMazeAPIManager();
-    public async Task<bool> ShowExists(string showId)
+    public async Task<bool> ShowExists(string showId, int randomIndex)
     {
         string url = $"https://api.tvmaze.com/shows?imdb={showId}";
         var request = UnityWebRequest.Get(url);
@@ -17,7 +17,7 @@ public class TVMazeAPIManager
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            await GetShowDetails(showId);
+            await GetShowDetails(showId, randomIndex);
             return true;
         }
 
@@ -28,7 +28,7 @@ public class TVMazeAPIManager
         throw new Exception($"Error checking show existence: {request.error}");
     }
 
-    public async Task<TVShow> GetShowDetails(string showId)
+    public async Task<TVShow> GetShowDetails(string showId, int randomIndex)
     {
         string url = $"https://api.tvmaze.com/lookup/shows?imdb={showId}";
 
@@ -36,8 +36,18 @@ public class TVMazeAPIManager
         await request.SendWebRequest();
 
 
-        if (request.result != UnityWebRequest.Result.Success)
+        if (request.responseCode == 404)
+        {
+            //Call cloud code to remove this entry from the database, since it doesn't exist.
+            // do this in cloud code
+            //jsonFile = JsonUtility.ToJson(database);
+
+            await UnityCloudCodeManager.Instance.RemoveShow(showId);
+
             throw new Exception($"Error fetching show details: {request.error}");
+
+        }
+            
         var shows = JsonConvert.DeserializeObject<TVShow>(request.downloadHandler.text);
 
         if (shows == null)
