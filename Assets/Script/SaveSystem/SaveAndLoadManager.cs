@@ -12,8 +12,8 @@ public class SaveAndLoadManager
     string folderPath = Path.Combine(Application.persistentDataPath, "PosterFolder");
     public List<PlayerShows> playerShows = new List<PlayerShows>();
 
-    private const string CustomDataId = "moviedatasetupdate"; 
-    private const string TvSeriesKey = "TvSeriesDatabaseJSON";
+    private const string CustomDataId = "TvSeriesDatabaseJSON"; 
+    private const string TvSeriesKey = "tvSeries";
     
     public TvSeriesDatabase tvSeriesDatabase;
 

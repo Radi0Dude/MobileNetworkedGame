@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Services.CloudCode;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class UnityCloudCodeManager
@@ -14,8 +15,8 @@ public class UnityCloudCodeManager
         {
             { "showId", showId }
         };
-
-        await CloudCodeService.Instance.CallEndpointAsync<object>("RemoveShow", args);
+        Debug.Log($"Removed show {showId} from cloud code");
+        await CloudCodeService.Instance.CallModuleEndpointAsync<object>("UpdateJsonForAll", "RemoveShow", args);
     }
    
 }

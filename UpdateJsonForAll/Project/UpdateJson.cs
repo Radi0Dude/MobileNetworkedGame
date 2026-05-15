@@ -10,8 +10,8 @@ namespace TvSeriesModule;
 
 public class TvSeriesService
 {
-    private const string TvSeriesKey = "TvSeriesDatabaseJSON";
-    private const string CustomDataId = "global";  // <-- Your custom data store ID
+    private const string TvSeriesKey = "tvSeries";
+    private const string CustomDataId = "TvSeriesDatabaseJSON";  // <-- Your custom data store ID
     private readonly IGameApiClient _gameApiClient;
 
     public TvSeriesService(IGameApiClient gameApiClient)
