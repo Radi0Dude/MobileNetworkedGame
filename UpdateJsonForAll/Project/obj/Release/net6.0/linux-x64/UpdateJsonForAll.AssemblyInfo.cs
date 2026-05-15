@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("UpdateJsonForAll")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+718ef925189678a3a71f78b78f5027022bde7b70")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e54ca4d765c8e04cff87580134b08cb49cd686cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("UpdateJsonForAll")]
 [assembly: System.Reflection.AssemblyTitleAttribute("UpdateJsonForAll")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

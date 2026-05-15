@@ -1,18 +1,30 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Unity.Services.CloudCode.Apis;
 using Unity.Services.CloudCode.Core;
-using Unity.Services.CloudSave.Model;  // <-- Required for SetItemBody
+using Unity.Services.CloudSave.Model;
 
 namespace TvSeriesModule;
+
+public class ModuleConfig : ICloudCodeSetup
+{
+    public void Setup(ICloudCodeConfig config)
+    {
+        config.Dependencies.AddSingleton(GameApiClient.Create());
+    }
+}
 
 public class TvSeriesService
 {
     private const string TvSeriesKey = "tvSeries";
-    private const string CustomDataId = "TvSeriesDatabaseJSON";  // <-- Your custom data store ID
+    private const string CustomDataId = "TvSeriesDatabaseJSON"; 
     private readonly IGameApiClient _gameApiClient;
+
+   
 
     public TvSeriesService(IGameApiClient gameApiClient)
     {
@@ -35,6 +47,15 @@ public class TvSeriesService
             context.ProjectId,
             CustomDataId,           
             new List<string> { TvSeriesKey });
+
+        if (response == null)
+            throw new Exception("Response is null");
+
+        if (response.Data == null)
+            throw new Exception("Response.Data is null");
+
+        if (response.Data.Results == null)
+            throw new Exception("Response.Data.Results is null");
 
         var item = response.Data.Results.FirstOrDefault();
         if (item?.Value == null)

@@ -8,6 +8,7 @@ C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Grpc.Core.
 C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Grpc.Net.Client.dll
 C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Grpc.Net.Common.dll
 C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\JsonSubTypes.dll
+C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Tobia\AppData\Local\Temp\UpdateJsonForAll\module-compilation\Newtonsoft.Json.dll
