@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,16 +19,17 @@ public class SignInAnon : MonoBehaviour
 
     
 
-    private void Awake()
-    {
-        if (tutorialScene == null)
-        {
-            Debug.LogError("Load to scene is not assigned. Please assign a scene in the inspector.");
-            return;
-        }
-        SignUpAnon();
-        sceneName = tutorialScene.name;
-    }
+    //private async void Awake()
+    //{
+    //    if (tutorialScene == null)
+    //    {
+    //        Debug.LogError("Load to scene is not assigned. Please assign a scene in the inspector.");
+    //        return;
+    //    }
+    //    sceneName = tutorialScene.name;
+    //    await SignUpAnon();
+        
+    //}
 
 
     public async void SignUpAnon()
@@ -41,6 +43,7 @@ public class SignInAnon : MonoBehaviour
         {
             Debug.LogError($"An error occurred during anonymous sign-up: {ex.GetBaseException().Message}");
         }
+        GetComponent<GoToScene>().GoToSceneEvent();
     }
 }
 

@@ -23,5 +23,7 @@ public class SignInWithUnity : MonoBehaviour
         { 
             Debug.LogException(e);
         }
+
+        GetComponent<GoToScene>().GoToSceneEvent();
     }
 }

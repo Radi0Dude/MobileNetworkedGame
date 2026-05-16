@@ -887,8 +887,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1334615266}
   - component: {fileID: 1334615265}
+  - component: {fileID: 1334615267}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CreateName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -908,6 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCreateName
   inputField: {fileID: 939955410}
   noNameText: ' no name entered, please eneter a name'
+  playerNameFinder: PlayerName
 --- !u!4 &1334615266
 Transform:
   m_ObjectHideFlags: 0
@@ -923,6 +925,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1334615267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334615264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fab5f0c9e3a9384428b3cde8e03b5687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GoToScene
+  sceneName: SampleScene
 --- !u!1 &1720636798
 GameObject:
   m_ObjectHideFlags: 0

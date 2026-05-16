@@ -41,7 +41,7 @@ public class GetTVSeriesID : MonoBehaviour
     public void GetRandomShow()
     {
        
-        TextAsset jsonFile = Resources.Load<TextAsset>("TvSeries");
+        
 
         var database = SaveAndLoadManager.Instance.tvSeriesDatabase;
         currentRandomIndex = Random.Range(0, database.tvSeries.Length);

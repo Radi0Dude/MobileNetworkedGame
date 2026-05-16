@@ -35,6 +35,8 @@ public class PlayerCreateName : MonoBehaviour
             return;
         }
         await UnityAuthManager.Instance.ChangeUsername(name);
+        GetComponent<GoToScene>().GoToSceneEvent();
+
     }
 
     public void OnInputFieldChange()
