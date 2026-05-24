@@ -9,6 +9,11 @@ public class UnityServicesInit : MonoBehaviour
 
     async void Awake()
     {
+        Invoke(nameof(Setup), 0.1f);
+    }
+
+    private async void Setup() 
+    {
         try
         {
             await UnityServices.InitializeAsync();
@@ -16,7 +21,7 @@ public class UnityServicesInit : MonoBehaviour
             loadCorrectSceneInit.LoadCorrectScene();
         }
         catch (Exception e)
-        { 
+        {
             Debug.LogException(e);
         }
     }

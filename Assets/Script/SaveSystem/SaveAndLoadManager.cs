@@ -3,9 +3,12 @@ using System.IO;
 using System.Threading.Tasks;
 using Unity.Services.CloudSave;
 using UnityEngine;
+using System.Text;
+using WebSocketSharp;
 
 public class SaveAndLoadManager
 {
+    
     private static SaveAndLoadManager _instance;
     public static SaveAndLoadManager Instance => _instance ??= new SaveAndLoadManager();
 
@@ -107,14 +110,22 @@ public class SaveAndLoadManager
         }
     }
 
-    public void SaveShowIDs(string showIDs, int weight, string showURL, string showName)
+    public async void SaveShowIDs(string showIDs, int weight, string showURL, string showName)
     {
         playerShows.Clear();
-        LoadShowIDs();
+        await LoadShowIDs();
         playerShows.Add(new PlayerShows { showId = showIDs, weight = weight, showURL = showURL, title = showName });
 
         PlayerShowsWrapper wrapper = new PlayerShowsWrapper { shows = playerShows };
         string json = JsonUtility.ToJson(wrapper);
+        try
+        {
+            await UnityCloudSaveManager.Instance.SaveNewShow(json);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to save show IDs to Cloud Save: {ex.Message}");
+        }
 
 
         PlayerPrefs.SetString("SavedShows", json);
@@ -122,9 +133,30 @@ public class SaveAndLoadManager
 
     }
 
-    public void LoadShowIDs()
+    public async Task LoadShowIDs()
     {
         string json = PlayerPrefs.GetString("SavedShows", string.Empty);
+        string cloudJson = await UnityCloudSaveManager.Instance.LoadAllShows();   
+
+        //bool check = CompareJsons(json, cloudJson);
+        if (cloudJson.IsNullOrEmpty()) 
+        {
+            await UnityCloudSaveManager.Instance.SaveNewShow(json);
+            json  = await UnityCloudSaveManager.Instance.LoadAllShows();
+        }
+        else
+        {
+            //if (!check)
+            //{
+            //    //if i have time then combine them for now im just using the cloud one just in case they have played on another device and have different shows saved
+            //    //I know there will be problems if they ever decide to play offline
+            //    json = cloudJson;
+            //}
+            //I know that both does the same thing now, but its just to show that i know they should be combined
+            json = cloudJson;
+        }
+        
+
 
         if (!string.IsNullOrEmpty(json))
         {
@@ -135,6 +167,33 @@ public class SaveAndLoadManager
         {
             playerShows = new List<PlayerShows>();
         }
+
+    }
+
+    bool CompareJsons(string json1, string json2)
+    {
+        PlayerShowsWrapper wrapperJson1 = JsonUtility.FromJson<PlayerShowsWrapper>(json1);
+        PlayerShowsWrapper wrapperJson2 = JsonUtility.FromJson<PlayerShowsWrapper>(json2);
+        PlayerShows[] shows1 = wrapperJson1.shows.ToArray();
+        PlayerShows[] shows2 = wrapperJson2.shows.ToArray();
+        
+        if(shows1.Length != shows2.Length)
+        {
+            return false;
+        }
+        else
+        {
+            for(int i = 0; i < shows1.Length; i++)
+            {
+                if(shows1[i].showId != shows2[i].showId || shows1[i].weight != shows2[i].weight || shows1[i].showURL != shows2[i].showURL || shows1[i].title != shows2[i].title)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+
     }
 
     [System.Serializable]

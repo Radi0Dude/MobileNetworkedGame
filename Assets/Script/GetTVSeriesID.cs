@@ -21,7 +21,7 @@ public class GetTVSeriesID : MonoBehaviour
         LoadShowsOnStart();
         GetRandomShow();
         
-        StartCoroutine(TestingHundredsOfShows());
+        //StartCoroutine(TestingHundredsOfShows());
 
     }
     [ContextMenu("Test Hundreds of Shows")]
@@ -59,7 +59,7 @@ public class GetTVSeriesID : MonoBehaviour
         //}
         while (true)
         {
-            SaveAndLoadManager.Instance.LoadShowIDs();
+            await SaveAndLoadManager.Instance.LoadShowIDs();
 
             if (!SaveAndLoadManager.Instance.playerShows.Any(s => s.showId == currentID))
                 break;
@@ -84,7 +84,7 @@ public class GetTVSeriesID : MonoBehaviour
     }
     public async void LoadShowsOnStart() 
     { 
-        SaveAndLoadManager.Instance.LoadShowIDs();
+        await SaveAndLoadManager.Instance.LoadShowIDs();
         List<SaveAndLoadManager.PlayerShows> playerShows = SaveAndLoadManager.Instance.playerShows;
         foreach (var show in playerShows)
         {
