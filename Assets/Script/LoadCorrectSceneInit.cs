@@ -50,8 +50,8 @@ public class LoadCorrectSceneInit : MonoBehaviour
             else if(logInMethod == LogInMethod.Anonymous)
             {
                 await UnityAuthManager.Instance.SignUpAnon();
-                var playerInfo = await AuthenticationService.Instance.GetPlayerInfoAsync();
-                if(string.IsNullOrEmpty(playerInfo.Username))
+                string playerInfo = await UnityAuthManager.Instance.GetPlayerName();
+                if(string.IsNullOrEmpty(playerInfo))
                 {
                     Debug.Log("User has no username. Load scene for people with out username");
                     LoadSceneForPeopleWithOutUsername();

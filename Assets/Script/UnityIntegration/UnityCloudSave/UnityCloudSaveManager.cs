@@ -33,8 +33,10 @@ public class UnityCloudSaveManager
     {
         try
         {
-            await CloudSaveService.Instance.Data.Player.SaveAsync(new Dictionary<string, object> { { "PlayerShows", json } });
-            Debug.Log("Show data saved successfully to cloud");
+            var data = new Dictionary<string, object> { { "PlayerShows", json } };
+            await CloudSaveService.Instance.Data.Player.SaveAsync(data);
+            string playerId = Unity.Services.Authentication.AuthenticationService.Instance.PlayerId;
+            Debug.Log($"Show data saved successfully to cloud for Player ID: {playerId}");
         }
         catch (Exception ex)
         {

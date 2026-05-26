@@ -7,12 +7,12 @@ public class LoadPlayerName : MonoBehaviour
     [SerializeField]
     TMP_Text playerNameText;
 
-    private void Start()
+    private async void Start()
     {
         if (playerNameText == null)
             playerNameText = FindAnyObjectByType<TMP_Text>();
 
-        string playerNameValue = UnityAuthManager.Instance.GetPlayerName();
+        string playerNameValue = await UnityAuthManager.Instance.GetPlayerName();
 
         if (string.IsNullOrEmpty(playerNameValue))
         {

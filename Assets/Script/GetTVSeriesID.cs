@@ -18,7 +18,7 @@ public class GetTVSeriesID : MonoBehaviour
     {
         await SaveAndLoadManager.Instance.LoadTVSeriesDataset();
         posterImageSetter = FindAnyObjectByType<SetAndCreatePosterImage>();
-        LoadShowsOnStart();
+        
         GetRandomShow();
         
         //StartCoroutine(TestingHundredsOfShows());
@@ -76,23 +76,14 @@ public class GetTVSeriesID : MonoBehaviour
         Texture2D posterTexture = currentPoster.texture;
 
         await SaveAndLoadManager.Instance.SavePosterToDevice(posterTexture, currentID);
-        posterImageSetter.SetEverythingPoster(show.name, show.url, posterTexture);
-        SaveAndLoadManager.Instance.SaveShowIDs(currentID, show.weight, show.url, show.name);
+        //I changed the scene layout, this isnt needed anymore
+        //posterImageSetter.SetEverythingPoster(show.name, show.url, posterTexture);
+        await SaveAndLoadManager.Instance.SaveShowIDs(currentID, show.weight, show.url, show.name);
         GetRandomShow();
 
 
     }
-    public async void LoadShowsOnStart() 
-    { 
-        await SaveAndLoadManager.Instance.LoadShowIDs();
-        List<SaveAndLoadManager.PlayerShows> playerShows = SaveAndLoadManager.Instance.playerShows;
-        foreach (var show in playerShows)
-        {
-            Debug.Log($"Loaded Show: {show.title} (ID: {show.showId}, Weight: {show.weight}, URL: {show.showURL})");
-            Texture2D posterTexture = await SaveAndLoadManager.Instance.LoadPoster(show.showId);
-            posterImageSetter.SetEverythingPoster(show.title, show.showURL, posterTexture);
-        }
-    }
+    
     
 
 

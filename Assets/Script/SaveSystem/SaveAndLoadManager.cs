@@ -110,7 +110,7 @@ public class SaveAndLoadManager
         }
     }
 
-    public async void SaveShowIDs(string showIDs, int weight, string showURL, string showName)
+    public async Task SaveShowIDs(string showIDs, int weight, string showURL, string showName)
     {
         playerShows.Clear();
         await LoadShowIDs();

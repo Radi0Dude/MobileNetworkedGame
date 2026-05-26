@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c189581d24cb8a45a0e0359b1fece10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SignInAnon
-  tutorialScene: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  tutorialScene: {fileID: 102900000, guid: e264e123287469c438185b35fb375c2e, type: 3}
 --- !u!4 &59432701
 Transform:
   m_ObjectHideFlags: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab5f0c9e3a9384428b3cde8e03b5687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoToScene
-  sceneName: SampleScene
+  sceneName: FirstTimeUser
 --- !u!1 &560079388
 GameObject:
   m_ObjectHideFlags: 0

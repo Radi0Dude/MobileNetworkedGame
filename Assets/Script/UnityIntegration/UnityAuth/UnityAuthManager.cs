@@ -95,6 +95,8 @@ public class UnityAuthManager
         try
         {
             await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
+            Debug.Log($"Player name updated successfully to: {username}");
+
         }
         catch (AuthenticationException ex)
         {
@@ -105,7 +107,7 @@ public class UnityAuthManager
             Debug.LogException(ex);
         }
     }
-    public string GetPlayerName()
+    public async Task<string> GetPlayerName()
     {
         try
         {
