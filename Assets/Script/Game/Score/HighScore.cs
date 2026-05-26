@@ -1,51 +1,47 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class HighScore : MonoBehaviour
 {
     [SerializeField]
     int currentScore;
+    [SerializeField]
+    int weightMultiplier = 2;
 
-    Score score;
 
-    int highScore;
 
     ScoreCounter scoreCounter;
-    private void Awake()
+    private async void Start()
     {
         scoreCounter = FindFirstObjectByType<ScoreCounter>();
-        scoreCounter.OnScoreChanged += CheckHighScoreUpdate;
-        LoadHighScoreFromJson();
+        await LoadHigScore();
+        HighscoreChange();
     }
 
-    private void CheckHighScoreUpdate(int score)
-    {
-        currentScore = score;
-        if (currentScore > highScore)
-        {
-            HighscoreChange();
-        }
-    }
+   
 
     private void HighscoreChange()
     {
-        highScore = currentScore;
-        SaveHigescoreToJson();
+        scoreCounter.UpdateScoreText(currentScore);
     }
-    private void SaveHigescoreToJson()
-    {
-        //Sace to Json if score is higher than what is already saved
+    
 
-    }
-
-    private void LoadHighScoreFromJson()
+    private async Task LoadHigScore()
     {
-        //Load from Json and set highscore
-        
+        try
+        {
+            await SaveAndLoadManager.Instance.LoadShowIDs();
+            foreach (var playerShow in SaveAndLoadManager.Instance.playerShows)
+            {
+                int effectiveWeight = Mathf.Max(10, playerShow.weight);
+                currentScore += effectiveWeight * weightMultiplier;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to load high score: {ex.Message}");
+        }
+
     }
 }
 
-public struct Score
-{
-    public int highScore;
-
-}

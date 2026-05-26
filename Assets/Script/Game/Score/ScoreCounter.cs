@@ -21,7 +21,7 @@ public class ScoreCounter : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         if(scoreText == null)
         {
@@ -32,7 +32,7 @@ public class ScoreCounter : MonoBehaviour
         OnScoreChanged += UpdateScoreText;
     }
 
-    private void UpdateScoreText(int score)
+    public void UpdateScoreText(int score)
     {
         scoreText.text = $"Score: {score}";
     }
