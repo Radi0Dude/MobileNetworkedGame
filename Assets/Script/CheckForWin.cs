@@ -13,7 +13,7 @@ public class CheckForWin : MonoBehaviour
     }
     public void CheckForWinCondition()
     {
-        CheckForNewScore.Instance.hasBeenScored = true;
+       
         OnWin();
     }
 

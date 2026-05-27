@@ -1,19 +1,23 @@
+using System.Collections;
 using UnityEngine;
 
 public class CheckForScoreAdd : MonoBehaviour
 {
     GetTVSeriesID getTVSeriesID;
-    private void Start()
+    private IEnumerator Start()
     {
+        getTVSeriesID = FindAnyObjectByType<GetTVSeriesID>();
+        yield return new WaitForSeconds(0.5f);
         if (CheckForNewScore.Instance.hasBeenScored)
         {
             UpdateScore();
         }
-        getTVSeriesID = FindAnyObjectByType<GetTVSeriesID>();
+        
     }
 
-    private void UpdateScore()
+    private async void UpdateScore()
     {
-        getTVSeriesID.GetShowInfo();
+        //await getTVSeriesID.GetShowInfo();
+        CheckForNewScore.Instance.hasBeenScored = false;
     }
 }

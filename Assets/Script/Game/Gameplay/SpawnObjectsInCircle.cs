@@ -47,7 +47,8 @@ public class SpawnObjectsInCircle : MonoBehaviour
             spawnedObjects[0].SetActive(true);
         }
         else 
-        { 
+        {
+            CheckForNewScore.Instance.hasBeenScored = true;
             FindFirstObjectByType<GoToScene>().GoToSceneEvent();
         }
         
