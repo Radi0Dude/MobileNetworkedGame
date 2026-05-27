@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class UnityFriendsManager : MonoBehaviour
 {
-    
+    private static UnityFriendsManager _instance;
+    public static UnityFriendsManager Instance => _instance ??= new UnityFriendsManager();
     public async Task SendFriendRequest(string friendPlayerId)
     {
         await FriendsService.Instance.AddFriendAsync(friendPlayerId);

@@ -40,9 +40,6 @@ public class GetTVSeriesID : MonoBehaviour
     [ContextMenu("Get Random Show")]
     public void GetRandomShow()
     {
-       
-        
-
         var database = SaveAndLoadManager.Instance.tvSeriesDatabase;
         currentRandomIndex = Random.Range(0, database.tvSeries.Length);
         
