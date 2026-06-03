@@ -14,7 +14,7 @@ public class SignInAnon : MonoBehaviour
 
     [SerializeField, Header("Only use scene here")]
     UnityEngine.Object tutorialScene;
-
+    [SerializeField]
     string sceneName;
 
     
@@ -37,7 +37,7 @@ public class SignInAnon : MonoBehaviour
         try
         {
             await UnityAuthManager.Instance.SignUpAnon();
-            SceneManager.LoadScene(sceneName);
+            
         }
         catch (Exception ex)
         {
